@@ -1,0 +1,610 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ditsa Chakraborty — ML/AI Engineering Portfolio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#F8F9FB;
+    --surface:#FFFFFF;
+    --ink:#14171F;
+    --ink-soft:#4B5565;
+    --muted:#8993A4;
+    --line:#E4E7EE;
+    --accent:#2C4A86;
+    --accent-strong:#1E345E;
+    --accent-tint:#EAF0FB;
+    --highlight:#A9741F;
+    --serif: 'Newsreader', Georgia, serif;
+    --sans: 'IBM Plex Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+    --mono: 'IBM Plex Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+    --maxw: 1080px;
+  }
+
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth;}
+  @media (prefers-reduced-motion: reduce){
+    html{scroll-behavior:auto;}
+    *{animation-duration:0.001ms !important; transition-duration:0.001ms !important;}
+  }
+
+  body{
+    background:var(--bg);
+    color:var(--ink);
+    font-family:var(--sans);
+    line-height:1.5;
+    -webkit-font-smoothing:antialiased;
+  }
+
+  a{color:inherit; text-decoration:none;}
+  a:focus-visible, button:focus-visible{
+    outline:2px solid var(--accent);
+    outline-offset:3px;
+    border-radius:2px;
+  }
+
+  .wrap{max-width:var(--maxw); margin:0 auto; padding:0 28px;}
+
+  .eyebrow{
+    font-family:var(--mono);
+    font-size:12px;
+    letter-spacing:0.08em;
+    text-transform:uppercase;
+    color:var(--accent);
+    font-weight:500;
+  }
+
+  /* ---------- NAV ---------- */
+  header.site{
+    position:sticky; top:0; z-index:50;
+    background:rgba(248,249,251,0.92);
+    backdrop-filter:blur(6px);
+    border-bottom:1px solid var(--line);
+  }
+  nav{
+    display:flex; align-items:center; justify-content:space-between;
+    padding:18px 28px;
+    max-width:var(--maxw); margin:0 auto;
+  }
+  .logo{
+    font-family:var(--serif);
+    font-size:19px;
+    font-weight:500;
+    letter-spacing:0.01em;
+  }
+  .navlinks{display:flex; gap:28px; font-family:var(--mono); font-size:12.5px; letter-spacing:0.03em;}
+  .navlinks a{color:var(--ink-soft); transition:color .15s ease;}
+  .navlinks a:hover{color:var(--accent);}
+  @media (max-width:640px){
+    .navlinks{gap:16px;}
+    .navlinks span.nl-text{display:none;}
+  }
+
+  /* ---------- SIGNAL DIVIDER ---------- */
+  .signal{width:100%; height:28px; display:block; margin:0 auto;}
+  .signal svg{width:100%; height:100%; display:block;}
+
+  /* ---------- HERO ---------- */
+  .hero{padding:76px 0 40px;}
+  .hero h1{
+    font-family:var(--serif);
+    font-weight:500;
+    font-size:clamp(38px, 6vw, 58px);
+    line-height:1.05;
+    letter-spacing:-0.01em;
+    margin-top:14px;
+  }
+  .hero .role{
+    font-family:var(--mono);
+    font-size:13px;
+    color:var(--muted);
+    margin-top:10px;
+    letter-spacing:0.02em;
+  }
+  .hero p.lede{
+    font-family:var(--serif);
+    font-style:italic;
+    font-size:clamp(18px,2.4vw,22px);
+    color:var(--ink-soft);
+    max-width:640px;
+    margin-top:22px;
+    line-height:1.45;
+  }
+
+  .metric-strip{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:0;
+    margin-top:44px;
+    border-top:1px solid var(--line);
+    border-bottom:1px solid var(--line);
+  }
+  .metric{
+    padding:22px 20px 22px 0;
+    border-left:1px solid var(--line);
+  }
+  .metric:first-child{border-left:none; padding-left:0;}
+  .metric .num{
+    font-family:var(--serif);
+    font-size:clamp(28px,4vw,36px);
+    font-weight:500;
+    color:var(--highlight);
+    line-height:1;
+  }
+  .metric .cap{
+    font-family:var(--mono);
+    font-size:11px;
+    color:var(--ink-soft);
+    text-transform:uppercase;
+    letter-spacing:0.05em;
+    margin-top:8px;
+    line-height:1.4;
+  }
+  @media (max-width:640px){
+    .metric-strip{grid-template-columns:1fr; }
+    .metric{border-left:none; border-top:1px solid var(--line); padding:18px 0;}
+    .metric:first-child{border-top:none;}
+  }
+
+  .cta-row{display:flex; gap:14px; margin-top:36px; flex-wrap:wrap;}
+  .btn{
+    font-family:var(--mono);
+    font-size:12.5px;
+    letter-spacing:0.03em;
+    padding:12px 20px;
+    border-radius:3px;
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    transition:transform .15s ease, background .15s ease, border-color .15s ease;
+  }
+  .btn-primary{background:var(--accent); color:#fff;}
+  .btn-primary:hover{background:var(--accent-strong); transform:translateY(-1px);}
+  .btn-outline{border:1px solid var(--line); color:var(--ink);}
+  .btn-outline:hover{border-color:var(--accent); color:var(--accent); transform:translateY(-1px);}
+
+  /* ---------- SECTION HEADERS ---------- */
+  section{padding:64px 0;}
+  .sec-head{margin-bottom:36px; max-width:640px;}
+  .sec-head h2{
+    font-family:var(--serif);
+    font-weight:500;
+    font-size:clamp(26px,3.4vw,32px);
+    margin-top:10px;
+  }
+  .sec-head p{color:var(--ink-soft); margin-top:12px; font-size:15px;}
+
+  /* ---------- FEATURED PROJECT CARDS ---------- */
+  .projects{display:flex; flex-direction:column; gap:20px;}
+  .card{
+    background:var(--surface);
+    border:1px solid var(--line);
+    border-radius:6px;
+    padding:32px;
+    transition:box-shadow .18s ease, border-color .18s ease;
+  }
+  .card:hover{box-shadow:0 8px 28px rgba(20,23,31,0.06); border-color:#D8DCE5;}
+
+  .card-top{
+    display:flex; justify-content:space-between; align-items:flex-start; gap:20px; flex-wrap:wrap;
+  }
+  .card h3{
+    font-family:var(--serif);
+    font-weight:500;
+    font-size:24px;
+    margin-top:8px;
+  }
+  .card .meta-tag{
+    font-family:var(--mono);
+    font-size:11px;
+    color:var(--muted);
+    white-space:nowrap;
+    padding-top:6px;
+  }
+  .card .one-liner{
+    color:var(--ink-soft);
+    font-size:15px;
+    max-width:620px;
+    margin-top:10px;
+  }
+
+  .readout{
+    display:flex; flex-wrap:wrap;
+    gap:0;
+    margin-top:22px;
+    border-top:1px solid var(--line);
+    border-bottom:1px solid var(--line);
+  }
+  .readout .r-item{
+    padding:14px 22px 14px 0;
+    margin-right:22px;
+    border-right:1px solid var(--line);
+  }
+  .readout .r-item:last-child{border-right:none; margin-right:0;}
+  .readout .r-val{font-family:var(--mono); font-weight:600; font-size:15px; color:var(--ink);}
+  .readout .r-label{font-family:var(--mono); font-size:10.5px; color:var(--muted); text-transform:uppercase; letter-spacing:0.04em; margin-top:3px;}
+
+  .card ul.bullets{margin-top:20px; padding-left:0; list-style:none;}
+  .card ul.bullets li{
+    position:relative; padding-left:18px; margin-top:9px;
+    font-size:14.5px; color:var(--ink-soft); line-height:1.55;
+  }
+  .card ul.bullets li::before{
+    content:"—"; position:absolute; left:0; color:var(--muted);
+  }
+
+  .tags{display:flex; flex-wrap:wrap; gap:8px; margin-top:22px;}
+  .tag{
+    font-family:var(--mono); font-size:11px; color:var(--accent-strong);
+    background:var(--accent-tint); padding:5px 10px; border-radius:3px;
+    letter-spacing:0.01em;
+  }
+
+  .card-foot{
+    display:flex; justify-content:space-between; align-items:center;
+    margin-top:26px; flex-wrap:wrap; gap:12px;
+  }
+  .card-link{
+    font-family:var(--mono); font-size:13px; color:var(--accent);
+    display:inline-flex; align-items:center; gap:6px;
+    border-bottom:1px solid transparent;
+  }
+  .card-link:hover{border-bottom-color:var(--accent);}
+
+  /* ---------- SECONDARY / COMPACT CARDS ---------- */
+  .note-box{
+    font-size:14px; color:var(--ink-soft);
+    background:var(--accent-tint); border:1px solid #DCE6F7;
+    border-radius:6px; padding:16px 18px; margin-bottom:24px; max-width:720px;
+  }
+  .compact-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:16px;}
+  @media (max-width:860px){.compact-grid{grid-template-columns:1fr;}}
+  .compact-card{
+    background:var(--surface); border:1px solid var(--line); border-radius:6px;
+    padding:22px; display:flex; flex-direction:column; justify-content:space-between;
+    transition:box-shadow .18s ease, border-color .18s ease;
+  }
+  .compact-card:hover{box-shadow:0 8px 28px rgba(20,23,31,0.06); border-color:#D8DCE5;}
+  .compact-card h4{font-family:var(--serif); font-weight:500; font-size:18px; margin-top:6px;}
+  .compact-card p{font-size:13.5px; color:var(--ink-soft); margin-top:8px; line-height:1.5;}
+  .compact-card .tags{margin-top:16px;}
+  .compact-card .card-link{margin-top:18px;}
+
+  /* ---------- SKILLS ---------- */
+  .skills-grid{display:grid; grid-template-columns:repeat(4,1fr); gap:28px;}
+  @media (max-width:760px){.skills-grid{grid-template-columns:repeat(2,1fr);}}
+  .skill-col .eyebrow{margin-bottom:12px; display:block;}
+  .skill-col ul{list-style:none;}
+  .skill-col li{font-size:14px; color:var(--ink-soft); padding:5px 0; border-bottom:1px dashed var(--line);}
+  .skill-col li:last-child{border-bottom:none;}
+
+  /* ---------- EDUCATION ---------- */
+  .edu-row{
+    display:flex; justify-content:space-between; align-items:baseline;
+    border-top:1px solid var(--line); border-bottom:1px solid var(--line);
+    padding:22px 0; flex-wrap:wrap; gap:8px;
+  }
+  .edu-row .deg{font-family:var(--serif); font-size:19px;}
+  .edu-row .inst{font-family:var(--mono); font-size:12.5px; color:var(--muted);}
+
+  /* ---------- FOOTER ---------- */
+  footer{padding:56px 0 40px;}
+  .footer-top{
+    display:flex; justify-content:space-between; align-items:flex-end;
+    flex-wrap:wrap; gap:24px; padding-bottom:28px; border-bottom:1px solid var(--line);
+  }
+  .footer-top h3{font-family:var(--serif); font-size:26px; font-weight:500; max-width:420px;}
+  .contact-links{display:flex; gap:22px; flex-wrap:wrap;}
+  .contact-links a{
+    font-family:var(--mono); font-size:12.5px; color:var(--accent);
+    border-bottom:1px solid transparent;
+  }
+  .contact-links a:hover{border-bottom-color:var(--accent);}
+  .copyright{margin-top:22px; font-family:var(--mono); font-size:11px; color:var(--muted);}
+</style>
+</head>
+<body>
+
+<header class="site">
+  <nav>
+    <div class="logo">Ditsa Chakraborty</div>
+    <div class="navlinks">
+      <a href="#ml-projects">Projects</a>
+      <a href="#engineering">Engineering</a>
+      <a href="#skills">Skills</a>
+      <a href="resume.pdf" download>Resume</a>
+    </div>
+  </nav>
+</header>
+
+<main class="wrap">
+
+  <!-- ============ HERO ============ -->
+  <section class="hero">
+    <span class="eyebrow">ML / AI Engineering</span>
+    <h1>Ditsa Chakraborty</h1>
+    <div class="role">B.Tech, Electronics &amp; Communication Engineering — SRM Institute of Science and Technology</div>
+    <p class="lede">I build models and systems that turn raw signals — pixel data, RF strength, market news — into working decisions.</p>
+
+    <div class="metric-strip">
+      <div class="metric">
+        <div class="num">96.1%</div>
+        <div class="cap">Validation accuracy — CNN fruit<br>freshness classifier</div>
+      </div>
+      <div class="metric">
+        <div class="num">99.7%</div>
+        <div class="cap">Neural net classification accuracy —<br>embedded ML beam selection on ESP32</div>
+      </div>
+      <div class="metric">
+        <div class="num">4</div>
+        <div class="cap">Production systems shipped during<br>a fintech software internship</div>
+      </div>
+    </div>
+
+    <div class="cta-row">
+      <a class="btn btn-primary" href="#ml-projects">View ML projects ↓</a>
+      <a class="btn btn-outline" href="resume.pdf" download>Download résumé (PDF)</a>
+    </div>
+  </section>
+
+  <div class="signal">
+    <svg viewBox="0 0 1080 28" preserveAspectRatio="none">
+      <polyline points="0,14 120,14 140,4 160,24 180,14 340,14 360,20 380,8 400,14 620,14 640,6 660,22 680,14 900,14 920,18 940,10 960,14 1080,14"
+        fill="none" stroke="#2C4A86" stroke-width="1" opacity="0.35"/>
+    </svg>
+  </div>
+
+  <!-- ============ FEATURED ML PROJECTS ============ -->
+  <section id="ml-projects">
+    <div class="sec-head">
+      <span class="eyebrow">Featured</span>
+      <h2>Applied ML projects</h2>
+      <p>Three projects spanning computer vision, embedded systems, and NLP — the throughline is turning noisy real-world signal into a reliable classification or decision.</p>
+    </div>
+
+    <div class="projects">
+
+      <!-- Project 1: Fruit Quality CNN -->
+      <article class="card">
+        <div class="card-top">
+          <div>
+            <span class="eyebrow">Computer Vision</span>
+            <h3>Automated Fruit Quality Assessment</h3>
+          </div>
+          <span class="meta-tag">Solo project · IEEE paper</span>
+        </div>
+        <p class="one-liner">A MobileNetV2 transfer-learning classifier that separates fresh produce from rotten, reaching high accuracy from a training set of just 566 images.</p>
+
+        <div class="readout">
+          <div class="r-item"><div class="r-val">96.1%</div><div class="r-label">Val. accuracy</div></div>
+          <div class="r-item"><div class="r-val">566</div><div class="r-label">Training images</div></div>
+          <div class="r-item"><div class="r-val">10</div><div class="r-label">Epochs</div></div>
+          <div class="r-item"><div class="r-val">Fresh / Rotten</div><div class="r-label">Classes</div></div>
+        </div>
+
+        <ul class="bullets">
+          <li>Restructured a 3-fruit Kaggle dataset (apple, banana, strawberry) into a binary fresh/rotten task to focus the model on quality, not fruit type.</li>
+          <li>Froze MobileNetV2's ImageNet-pretrained base and trained a custom classification head, avoiding overfitting on a small dataset.</li>
+          <li>Outperformed a from-scratch CNN baseline (~88%) and an SVM baseline (~82%) by a wide margin.</li>
+        </ul>
+
+        <div class="tags">
+          <span class="tag">Python</span><span class="tag">TensorFlow / Keras</span><span class="tag">MobileNetV2</span><span class="tag">Transfer Learning</span>
+        </div>
+
+        <div class="card-foot">
+          <a class="card-link" href="paper.pdf" data-todo="Upload your paper as paper.pdf in the repo root">Read the IEEE paper →</a>
+        </div>
+      </article>
+
+      <!-- Project 2: ESP32 ML Beam Selection -->
+      <article class="card">
+        <div class="card-top">
+          <div>
+            <span class="eyebrow">Embedded ML</span>
+            <h3>Transmission and Reception of Signal Using ESP-32 with Machine Learning</h3>
+          </div>
+          <span class="meta-tag">Team of 3 · Presented at RASET 2026 (IEEE OES)</span>
+        </div>
+        <p class="one-liner">A low-cost direction-finding system: a trained classifier reads live RF signal-strength data from three ESP32 nodes and predicts the strongest signal path in real time.</p>
+
+        <div class="readout">
+          <div class="r-item"><div class="r-val">99.7%</div><div class="r-label">Neural net accuracy</div></div>
+          <div class="r-item"><div class="r-val">90.65%</div><div class="r-label">Random forest accuracy</div></div>
+          <div class="r-item"><div class="r-val">3</div><div class="r-label">ESP32 nodes</div></div>
+          <div class="r-item"><div class="r-val">~₹2,000</div><div class="r-label">Total build cost</div></div>
+        </div>
+
+        <ul class="bullets">
+          <li>Built a transmitter + two-receiver RSSI pipeline and logged signal-strength data across spatial positions and beams to train on.</li>
+          <li>Trained and compared neural network and Random Forest classifiers to predict communication behavior, reaching 99.7% and 90.65% accuracy respectively.</li>
+          <li>Built a live Python dashboard with LED hardware indicators for real-time beam selection, then presented the work at RASET 2026, a national conference organized by IEEE OES.</li>
+        </ul>
+
+        <div class="tags">
+          <span class="tag">ESP32</span><span class="tag">Embedded C</span><span class="tag">Python</span><span class="tag">Random Forest</span><span class="tag">scikit-learn</span>
+        </div>
+
+        <div class="card-foot">
+          <a class="card-link" href="slides.pdf" data-todo="Upload your slides as slides.pdf in the repo root">View project slides →</a>
+        </div>
+      </article>
+
+      <!-- Project 3: Sentiment Analysis Trading -->
+      <article class="card">
+        <div class="card-top">
+          <div>
+            <span class="eyebrow">NLP + Trading Systems</span>
+            <h3>Sentiment-Driven Trading Signals</h3>
+          </div>
+          <span class="meta-tag">Internship · ZeTheta Algorithms</span>
+        </div>
+        <p class="one-liner">A pipeline that reads financial news headlines in real time, scores them with FinBERT, and converts sentiment into buy/sell signals for a live virtual portfolio.</p>
+
+        <div class="readout">
+          <div class="r-item"><div class="r-val">15 days</div><div class="r-label">Build time</div></div>
+          <div class="r-item"><div class="r-val">₹1,00,000</div><div class="r-label">Virtual portfolio</div></div>
+          <div class="r-item"><div class="r-val">FinBERT</div><div class="r-label">Model</div></div>
+          <div class="r-item"><div class="r-val">Real-time</div><div class="r-label">Pipeline</div></div>
+        </div>
+
+        <ul class="bullets">
+          <li>Built a news ingestion pipeline pulling live headlines and scoring them with a finance-tuned BERT model.</li>
+          <li>Designed an ensemble scoring system that combines multiple weighted signals for a more stable output.</li>
+          <li>Streamed live signals and portfolio P&amp;L to a React dashboard over WebSockets.</li>
+        </ul>
+
+        <div class="tags">
+          <span class="tag">Python</span><span class="tag">FastAPI</span><span class="tag">FinBERT</span><span class="tag">NewsAPI</span><span class="tag">WebSockets</span><span class="tag">React</span>
+        </div>
+
+        <div class="card-foot">
+          <a class="card-link" href="#" data-todo="Paste unlisted YouTube demo link">Watch demo →</a>
+        </div>
+      </article>
+
+    </div>
+  </section>
+
+  <div class="signal">
+    <svg viewBox="0 0 1080 28" preserveAspectRatio="none">
+      <polyline points="0,14 120,14 140,4 160,24 180,14 340,14 360,20 380,8 400,14 620,14 640,6 660,22 680,14 900,14 920,18 940,10 960,14 1080,14"
+        fill="none" stroke="#2C4A86" stroke-width="1" opacity="0.35"/>
+    </svg>
+  </div>
+
+  <!-- ============ ADDITIONAL ENGINEERING WORK ============ -->
+  <section id="engineering">
+    <div class="sec-head">
+      <span class="eyebrow">Software Internship — ZeTheta Algorithms, Feb–May 2026</span>
+      <h2>Additional engineering work</h2>
+      <p>Three more full-stack systems built and deployed during the same internship, each shipped in a 15-day sprint.</p>
+    </div>
+
+    <div class="note-box">
+      These were built under a company internship agreement, so the source repositories are company-owned and private. Each project below links to a short walkthrough instead.
+    </div>
+
+    <div class="compact-grid">
+
+      <div class="compact-card">
+        <div>
+          <span class="eyebrow">01 — First project</span>
+          <h4>Convertible Bond Laboratory</h4>
+          <p>A financial pricing tool — binomial option pricing, bond floor calculation, and a delta-hedging simulator, built and deployed in 15 days.</p>
+          <div class="tags">
+            <span class="tag">TypeScript</span><span class="tag">Node.js</span><span class="tag">Vercel</span>
+          </div>
+        </div>
+        <a class="card-link" href="#" data-todo="Paste unlisted YouTube demo link">Watch demo →</a>
+      </div>
+
+      <div class="compact-card">
+        <div>
+          <span class="eyebrow">02</span>
+          <h4>Phantom Liquidity Hunter</h4>
+          <p>Real-time detection of spoofing and layering in stock order books, flagging manipulation patterns as they happen.</p>
+          <div class="tags">
+            <span class="tag">Node.js</span><span class="tag">Express</span><span class="tag">React</span><span class="tag">Supabase</span>
+          </div>
+        </div>
+        <a class="card-link" href="#" data-todo="Paste unlisted YouTube demo link">Watch demo →</a>
+      </div>
+
+      <div class="compact-card">
+        <div>
+          <span class="eyebrow">03</span>
+          <h4>Market Depth Explorer</h4>
+          <p>Live order-book visualization for Indian equities — depth curves, VWAP, and execution-cost estimates updating in under a second.</p>
+          <div class="tags">
+            <span class="tag">TypeScript</span><span class="tag">React / Vite</span><span class="tag">WebSockets</span>
+          </div>
+        </div>
+        <a class="card-link" href="#" data-todo="Paste unlisted YouTube demo link">Watch demo →</a>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ============ SKILLS ============ -->
+  <section id="skills">
+    <div class="sec-head">
+      <span class="eyebrow">Toolbox</span>
+      <h2>Skills</h2>
+    </div>
+
+    <div class="skills-grid">
+      <div class="skill-col">
+        <span class="eyebrow">ML &amp; Data</span>
+        <ul>
+          <li>Python / Pandas</li>
+          <li>TensorFlow / Keras</li>
+          <li>scikit-learn</li>
+          <li>CNNs &amp; Transfer Learning</li>
+          <li>Neural Networks / Random Forest</li>
+          <li>FinBERT / NLP</li>
+          <li>Plotly / Data Visualization</li>
+        </ul>
+      </div>
+      <div class="skill-col">
+        <span class="eyebrow">Languages &amp; Frameworks</span>
+        <ul>
+          <li>Python · TypeScript · JavaScript</li>
+          <li>SQL · Java</li>
+          <li>React</li>
+          <li>Node.js / Express</li>
+          <li>FastAPI</li>
+        </ul>
+      </div>
+      <div class="skill-col">
+        <span class="eyebrow">Systems &amp; Deployment</span>
+        <ul>
+          <li>WebSockets</li>
+          <li>Supabase / PostgreSQL</li>
+          <li>Vercel / Render</li>
+          <li>Git / CI-CD</li>
+        </ul>
+      </div>
+      <div class="skill-col">
+        <span class="eyebrow">Embedded &amp; Hardware</span>
+        <ul>
+          <li>ESP32 / Arduino</li>
+          <li>FPGA / Verilog</li>
+          <li>LTspice · Scilab</li>
+          <li>RF Signal Processing</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ EDUCATION ============ -->
+  <section id="education" style="padding-top:0;">
+    <div class="edu-row">
+      <span class="deg">B.Tech, Electronics &amp; Communication Engineering</span>
+      <span class="inst">SRM Institute of Science and Technology, Vadapalani Campus</span>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="footer-top">
+      <h3>Let's talk about ML systems, embedded intelligence, or applied NLP.</h3>
+      <div class="contact-links">
+        <a href="mailto:mail2ditsac@gmail.com">Email</a>
+        <a href="https://www.linkedin.com/in/ditsa-chakraborty-7bb76139b" target="_blank" rel="noopener">LinkedIn</a>
+        <a href="#" data-todo="Add GitHub URL">GitHub</a>
+        <a href="resume.pdf" download>Résumé (PDF)</a>
+      </div>
+    </div>
+    <div class="copyright">© 2026 Ditsa Chakraborty. Built with intent, not a template.</div>
+  </div>
+</footer>
+
+</body>
+</html>
